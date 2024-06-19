@@ -1,0 +1,16 @@
+# Files and folders to ignore during Docker build
+/notebooks
+.env/
+.env.example
+/data
+
+# Git
+.git
+.gitignore
+
+# Docker
+.docker
+
+# Python
+__pycache__/
+.pytest_cache
