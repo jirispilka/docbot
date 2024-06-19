@@ -1,0 +1,67 @@
+[tool.poetry]
+name = "docbot"
+authors = ["Jiri Spilka"]
+description = "Docbot is a chatbot that answers questions about documentation"
+readme = "README.md"
+version = "0.0.0"
+packages = [{include = "docbot", from="src"}]
+
+[tool.poetry-dynamic-versioning.substitution]
+folders = [
+  { path = "src" }
+]
+
+[tool.poetry.dependencies]
+langchain = "^0.1.9"
+langchain-openai = "^0.0.8"
+langchain-pinecone = "^0.1.1"
+openai = "^1.13.3"
+pydantic = "^2.6.2"
+pydantic-settings = "^2.2.1"
+python = ">=3.11,<3.13"
+streamlit = "^1.31.1"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.6.2"
+pytest = "^8.0.2"
+pytest-cov = "^4.1.0"
+pytest-mock = "^3.12.0"
+ruff = "^0.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.black]
+line-length = 120
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F"]
+ignore = []
+
+[tool.ruff.format]
+# Like Black, use double quotes for strings.
+quote-style = "double"
+
+# Like Black, indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+
+# Enable auto-formatting of code examples in docstrings. Markdown,
+# reStructuredText code/literal blocks and doctests are all supported.
+# This is currently disabled by default, but it is planned for this
+# to be opt-out in the future.
+docstring-code-format = true
+
+# Set the line length limit used when formatting code snippets in docstrings.
+# This only has an effect when the `docstring-code-format` setting is enabled.
+docstring-code-line-length = "dynamic"
