@@ -1,4 +1,4 @@
-# 📚 Docbot - Chat with Your Documentation
+# 📚 Docbot - Chat with your documentation
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://github.com/jirispilka/docbot/blob/main/LICENSE)
 
