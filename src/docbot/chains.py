@@ -28,7 +28,7 @@ from docbot.constants import (
     LLM_MODEL_DEFAULT,
     OPENAI_TIMEOUT,
     PROMPT_STANDALONE_QUESTION,
-    RAG_PROMPT,
+    RAG_PROMPT_GENERAL,
     RETRIEVER_SEARCH_TYPE,
     RETRIEVER_TOP_K,
 )
@@ -134,7 +134,7 @@ class RagChainHelper:
         }
 
         answer = {
-            "answer": final_inputs | RAG_PROMPT | self.llm,
+            "answer": final_inputs | RAG_PROMPT_GENERAL | self.llm,
             "docs": itemgetter("docs"),
             "standalone_question": itemgetter("question"),
         }

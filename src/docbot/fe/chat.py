@@ -10,7 +10,7 @@
 import logging
 
 import streamlit as st
-from langchain.memory import StreamlitChatMessageHistory
+from langchain_community.chat_message_histories import StreamlitChatMessageHistory
 from langchain_core.documents import Document
 
 from docbot.chains import RagChainHelper
@@ -69,7 +69,7 @@ def ui_settings():
 
 
 def main():
-    st.title("Chat with Apify's documentation")
+    st.title("Chat")
     model_name, temperature, max_token_limit, show_prompt, debug_enabled = ui_settings()
 
     init_app(model_name, temperature, max_token_limit)
@@ -80,7 +80,7 @@ def main():
 
     c1, c2 = st.columns(2)
     with c1:
-        st.subheader("Chatbot")
+        st.subheader("Apify Assistant")
         for message in st.session_state.st_memory.messages:
             with st.chat_message(message.type):
                 st.markdown(message.content)

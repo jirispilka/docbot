@@ -17,7 +17,7 @@ from dotenv import load_dotenv
 from pydantic import Field, SecretStr
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-from docbot.constants import DEFAULT_LOG_FORMAT, LOGGER_NAME
+from docbot.constants import DEFAULT_LOG_FORMAT, LOGGER_NAME, SUPPORTED_DATABASES
 
 
 def setup(
@@ -50,8 +50,20 @@ class Config(BaseSettings):
 
     OPENAI_API_KEY: SecretStr | None = None
 
+    DATABASE: SUPPORTED_DATABASES
+
     PINECONE_INDEX_NAME: str | None = None
     PINECONE_API_KEY: SecretStr | None = None
+
+    OPENSEARCH_URL: str | None = None
+    OPENSEARCH_INDEX_NAME: str | None = None
+    AWS_ACCESS_KEY_ID: SecretStr | None = None
+    AWS_SECRET_ACCESS_KEY: SecretStr | None = None
+    AWS_REGION: str | None = "us-east-1"
+    AWS_SERVICE_NAME: str | None = "aoss"
+    AWS4_AUTH: bool | None = True
+    AWS_USE_SSL: bool | None = True
+    AWS_VERIFY_CERTS: bool | None = True
 
     model_config = SettingsConfigDict(
         env_file=Path(__file__).parent.parent.parent / ".env",
@@ -72,6 +84,3 @@ _config = Config()
 DEPLOYMENT = _config.DEPLOYMENT
 LOG_LEVEL = _config.LOG_LEVEL
 OPENAI_API_KEY = _config.OPENAI_API_KEY and _config.OPENAI_API_KEY.get_secret_value()
-
-PINECONE_INDEX_NAME = _config.PINECONE_INDEX_NAME
-PINECONE_API_KEY = _config.PINECONE_API_KEY and _config.PINECONE_API_KEY.get_secret_value()
