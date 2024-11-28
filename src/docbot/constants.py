@@ -26,7 +26,7 @@ LOGGER_NAME = "docbot"
 DEFAULT_LOG_FORMAT = "[%(asctime)s] %(levelname)s in %(module)s: %(message)s"
 
 # LLM
-LLM_MODEL_DEFAULT = ConfigOpenAIModels(class_="OpenAI", model="gpt-3.5-turbo", context_window_tokens=16385)
+LLM_MODEL_DEFAULT = ConfigOpenAIModels(class_="OpenAI", model="gpt-4o-mini", context_window_tokens=16385)
 
 RETRIEVER_TOP_K = 5  # get top_k results from vector store
 RETRIEVER_SEARCH_TYPE = "similarity"  # similarity or similarity_with_score
@@ -94,6 +94,27 @@ RAG_PROMPT = PromptTemplate.from_template(
     """
 )
 
+RAG_PROMPT_ACTOR_ISSUES = PromptTemplate.from_template(
+    template="""
+    You are smart and helpful assistant for the Apify Actor Issues and Documentation (referred as documentation).
+    You have extensive knowledge about Apify and always answer questions as helpfully as possible.
+
+    Given the following context, answer the question at the end.
+    Your responses should adhere to clarity and readability standards and must be devoid of any harmful content.
+    You are limited to answering questions about the Apify Actor issues and Apify's platform documentation.
+    If a question is unclear or beyond the documentation scope yet relevant to Apify, offer general guidance where feasible.
+    For questions beyond your knowledge, recommend next steps or resources rather than leaving the query unanswered.
+
+    Remember, always include an URL to the source of the context in your responses, formatted in markdown as [Page title](url).
+
+    Context: {context}
+
+    Question: {question}
+
+    Helpful Answer:
+    """
+)
+
 PROMPT_STANDALONE_QUESTION = PromptTemplate.from_template(
     template="""Given the following conversation, decide whether the user utterance is a statement, standalone
     question, or a follow up question.
@@ -110,6 +131,6 @@ PROMPT_WELCOME = """**Welcome to the Apify's Platform documentation Assistant!**
 the Apify Platform. \nWhat can I help you with?"""
 
 DEFAULT_DOCUMENT_PROMPT = PromptTemplate.from_template(
-    template="Page title: {title}, url: {url}, snippet: {page_content}"
+    template="snippet: {page_content}"
 )
 RESPONSE_ERROR = "We are sorry, we are encountering difficulties providing an appropriate response. Please try again."
